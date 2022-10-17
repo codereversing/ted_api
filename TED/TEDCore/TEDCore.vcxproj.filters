@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="Breakpoint.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Disassembler.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="GrpcServer.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Process.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Symbols.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Proto\TED.grpc.pb.cc">
+      <Filter>Source\Proto</Filter>
+    </ClCompile>
+    <ClCompile Include="Proto\TED.pb.cc">
+      <Filter>Source\Proto</Filter>
+    </ClCompile>
+    <ClCompile Include="Memory.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Console.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Breakpoint.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Disassembler.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="GrpcServer.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Process.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Symbols.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Proto\TED.grpc.pb.h">
+      <Filter>Headers\Proto</Filter>
+    </ClInclude>
+    <ClInclude Include="Proto\TED.pb.h">
+      <Filter>Headers\Proto</Filter>
+    </ClInclude>
+    <ClInclude Include="Memory.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Console.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="CommonTypes.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Headers">
+      <UniqueIdentifier>{bf030331-f9b3-4fee-bdcf-0ee3c4269ab6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source">
+      <UniqueIdentifier>{657eb249-1cd0-4eee-9b6b-50febfa04255}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources">
+      <UniqueIdentifier>{cf6a94d0-3b24-44db-a7f6-95d1a3a45c72}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Proto">
+      <UniqueIdentifier>{6dc62edf-337b-45b4-8a3e-a160e775ba19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Proto">
+      <UniqueIdentifier>{4a0b7a18-a669-45be-b9ab-34cd6fbf0d16}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Proto\TED.proto">
+      <Filter>Resources</Filter>
+    </None>
+  </ItemGroup>
+</Project>

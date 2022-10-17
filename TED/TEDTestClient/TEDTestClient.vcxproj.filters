@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="Source.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TEDCore\Proto\TED.grpc.pb.cc">
+      <Filter>Source\Proto</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TEDCore\Proto\TED.pb.cc">
+      <Filter>Source\Proto</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TEDClientAPI\Api.cpp">
+      <Filter>Source\Api</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TEDCore\GrpcServer.cpp">
+      <Filter>Source\Core\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TEDCore\Breakpoint.cpp">
+      <Filter>Source\Core\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TEDCore\Console.cpp">
+      <Filter>Source\Core\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TEDCore\Disassembler.cpp">
+      <Filter>Source\Core\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TEDCore\Memory.cpp">
+      <Filter>Source\Core\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TEDCore\Process.cpp">
+      <Filter>Source\Core\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TEDCore\Symbols.cpp">
+      <Filter>Source\Core\Source</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Headers">
+      <UniqueIdentifier>{b6eada8d-8311-4cba-b1d7-26cceb002c6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source">
+      <UniqueIdentifier>{1d943be6-7e92-4cf9-ab27-6b6a25882395}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Proto">
+      <UniqueIdentifier>{7e6adec8-3c14-43a0-aed3-0800f56121e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Proto">
+      <UniqueIdentifier>{62fc906c-4a06-4fd4-95fa-b7813426a45a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Api">
+      <UniqueIdentifier>{03e16cb1-3510-47d6-8906-280721185b45}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Core">
+      <UniqueIdentifier>{6010c531-836e-418c-bd48-cc4b88437a4a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Core\Headers">
+      <UniqueIdentifier>{8e098de7-bbcd-4d8d-b817-fb3929a66041}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Core\Source">
+      <UniqueIdentifier>{3de7a117-9fb6-403d-a51e-1ff9126d838a}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\TEDCore\Proto\TED.grpc.pb.h">
+      <Filter>Headers\Proto</Filter>
+    </ClInclude>
+    <ClInclude Include="..\TEDCore\Proto\TED.pb.h">
+      <Filter>Headers\Proto</Filter>
+    </ClInclude>
+    <ClInclude Include="..\TEDCore\Breakpoint.h">
+      <Filter>Source\Core\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\TEDCore\CommonTypes.h">
+      <Filter>Source\Core\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\TEDCore\Console.h">
+      <Filter>Source\Core\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\TEDCore\Disassembler.h">
+      <Filter>Source\Core\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\TEDCore\GrpcServer.h">
+      <Filter>Source\Core\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\TEDCore\Memory.h">
+      <Filter>Source\Core\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\TEDCore\Process.h">
+      <Filter>Source\Core\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\TEDCore\Symbols.h">
+      <Filter>Source\Core\Headers</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

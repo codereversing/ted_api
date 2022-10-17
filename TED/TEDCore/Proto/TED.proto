@@ -1,0 +1,233 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "io.grpc.ted.service";
+option java_outer_classname = "TEDProto";
+
+package TED.Grpc;
+
+service TEDService {
+
+  rpc GetBreakpoints(Empty) returns (stream BreakpointResponse) {}
+  rpc GetModules(Empty) returns (GetModulesResponse) {}
+
+  rpc EnableBreakAllCallsInModule(EnableBreakAllCallsInModuleRequest) returns (GenericResponse) {}
+  rpc DisableBreakAllCallsInModule(DisableBreakAllCallsInModuleRequest) returns (GenericResponse) {}
+  rpc EnableBreakCallByAddress(EnableBreakCallByAddressRequest) returns (GenericResponse) {}
+  rpc DisableBreakCallByAddress(DisableBreakCallByAddressRequest) returns (GenericResponse) {}
+  rpc EnableBreakCallByName(EnableBreakCallByNameRequest) returns (GenericResponse) {}
+  rpc DisableBreakCallByName(DisableBreakCallByNameRequest) returns (GenericResponse) {}
+
+  rpc EnableBreakpointByAddress(EnableBreakpointByAddressRequest) returns (GenericResponse) {}
+  rpc DisableBreakpointByAddress(DisableBreakpointByAddressRequest) returns (GenericResponse) {}
+  rpc EnableBreakpointByName(EnableBreakpointByNameRequest) returns (GenericResponse) {}
+  rpc DisableBreakpointByName(DisableBreakpointByNameRequest) returns (GenericResponse) {}
+
+  rpc DisassembleAddress(DisassembleAddressRequest) returns (DisassembleAddressResponse) {}
+
+  rpc LoadModule(LoadModuleRequest) returns (GenericResponse) {}
+  rpc UnloadModule(UnloadModuleRequest) returns (GenericResponse) {}
+
+  rpc ReadMemory(ReadMemoryRequest) returns (ReadMemoryResponse) {}
+  rpc WriteMemory(WriteMemoryRequest) returns (GenericResponse) {}
+
+  rpc CreateConsole(Empty) returns (GenericResponse) {}
+  rpc DestroyConsole(Empty) returns (GenericResponse) {}
+  
+  rpc EnableInternalLogging(Empty) returns (GenericResponse) {}
+  rpc DisableInternalLogging(Empty) returns (GenericResponse) {}
+
+  rpc Options(OptionsRequest) returns (GenericResponse) {}
+
+  rpc TestFunction(Empty) returns (GenericResponse) {}
+}
+
+message Empty {}
+
+message SegmentRegisters {
+    uint32 cs = 1;
+    uint32 ds = 2;
+    uint32 es = 3;
+    uint32 fs = 4;
+    uint32 gs = 5;
+    uint32 ss = 6;
+}
+
+message DebugRegisters {
+    uint64 dr0 = 1;
+    uint64 dr1 = 2;
+    uint64 dr2 = 3;
+    uint64 dr3 = 4;
+    uint64 dr6 = 5;
+    uint64 dr7 = 6;
+}
+
+message GeneralRegisters {
+    uint64 rax = 1;
+    uint64 rcx = 2;
+    uint64 rdx = 3;
+    uint64 rbx = 4;
+    uint64 rsp = 5;
+    uint64 rbp = 6;
+    uint64 rsi = 7;
+    uint64 rdi = 8;
+    uint64 rip = 9;
+}
+
+message GeneralRegistersX64 {
+	uint64 r8 = 1;
+    uint64 r9 = 2;
+    uint64 r10 = 3;
+    uint64 r11 = 4;
+    uint64 r12 = 5;
+    uint64 r13 = 6;
+    uint64 r14 = 7;
+    uint64 r15 = 8;
+}
+
+message Context {
+    SegmentRegisters segment_registers = 1;
+    DebugRegisters debug_registers = 2;
+    GeneralRegisters general_registers = 3;
+    GeneralRegistersX64 general_registers_x64 = 4;
+    int32 processor_flags = 5;
+}
+
+message Symbols {
+	string function_name = 1;
+}
+
+message StackFrame {
+    uint64 rip = 1;
+    uint64 return_address = 2;
+    uint64 frame_pointer = 3;
+    uint64 stack_pointer = 4;
+    repeated uint64 parameters = 5;
+    Symbols symbols = 6;
+}
+
+message CallStack {
+    repeated StackFrame stack_frame = 1;
+}
+
+message BreakpointResponse {
+    uint32 process_id = 1;
+	uint32 thread_id = 2;
+	uint64 source_address = 3;
+    uint64 destination_address = 4;
+
+	Context context = 5;
+    CallStack call_stack = 6;
+}
+
+message ExecutableSection {
+    string name = 1;
+    uint64 address = 2;
+    uint64 size = 3;
+}
+
+message ModuleInfo {
+    string name = 1;
+    uint64 base_address = 2;
+    uint64 size = 3;
+    repeated ExecutableSection executable_sections = 4;
+}
+
+message GetModulesResponse {
+    repeated ModuleInfo module_info = 1;
+}
+
+message EnableBreakAllCallsInModuleRequest {
+	string module_name = 1;
+}
+
+message DisableBreakAllCallsInModuleRequest {
+	string module_name = 1;
+}
+
+message EnableBreakCallByAddressRequest {
+	uint64 address = 1;
+}
+
+message DisableBreakCallByAddressRequest {
+	uint64 address = 1;
+}
+
+message EnableBreakCallByNameRequest {
+	string name = 1;
+}
+
+message DisableBreakCallByNameRequest {
+	string name = 1;
+}
+
+message EnableBreakpointByAddressRequest {
+	uint64 address = 1;
+}
+
+message DisableBreakpointByAddressRequest {
+	uint64 address = 1;
+}
+
+message EnableBreakpointByNameRequest {
+	string name = 1;
+}
+
+message DisableBreakpointByNameRequest {
+	string name = 1;
+}
+
+message LoadModuleRequest {
+	string path = 1;
+}
+
+message UnloadModuleRequest {
+	string path = 1;
+}
+
+message ReadMemoryRequest {
+    uint64 address = 1;
+    uint32 size = 2;
+}
+
+message ReadMemoryResponse {
+    bytes bytes = 1;
+}
+
+message WriteMemoryRequest {
+    uint64 address = 1;
+    bytes bytes = 2;
+}
+
+message OptionsRequest {
+	bool return_call_stack = 1;
+	bool return_context = 2;
+	bool return_symbol_info = 3;
+    bool use_invasive_breakpoints = 4;
+    bool unsafe_memory_mode = 5;
+    bool auto_disable_breakpoints_mode = 6;
+    bool kill_process_on_disconnect = 7;
+    string symbol_path = 8;
+}
+
+message DisassembleAddressRequest {
+    uint64 address = 1;
+    uint32 size = 2;
+}
+
+message Instruction {
+    uint64 address = 1;
+    string mnemonic = 2;
+    string text = 3;
+    bytes bytes = 4;
+}
+
+message DisassembleAddressResponse {
+    repeated Instruction instructions = 1;
+}
+
+message GenericResponse {
+	bool success = 1;
+	repeated uint32 last_error_code = 2;
+    repeated string error_message = 3;
+}
