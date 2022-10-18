@@ -92,7 +92,7 @@ std::unique_ptr<TED_GetModulesResponse, TED_DestroyModulesFncPtr> response{
 // "client and "response" memory will be freed when they go out of scope
 ```
 
-The next example shows how to set a breakpoint and subscribe for a streaming response from the server. This will set a breakpoint on a commonly used function in UI applications: [DispatchMessage](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-dispatchmessage). When this function is executed, the server will capture the programs state (context and call stack), and send it to the client. The client can then prints out the results to the console. Since the service returns a streaming response, the client continues to listen to the stream and prints out messages as they come in. On the server, there is a persistent connection established and breakpoint information events are pushed to the clients as they are received.
+The next example shows how to set a breakpoint and subscribe for a streaming response from the server. This will set a breakpoint on a commonly used function in UI applications: [DispatchMessage](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-dispatchmessage). When this function is executed, the server will capture information about the program's state, and send it to the client. The client then prints out the results to the console. Since the service returns a streaming response, the client continues to listen to the stream and prints out messages as they come in. On the server, there is a persistent connection established and breakpoint information events are sent to the clients as they are received.
 
 ```c++
 // Load client API and resolve functions
@@ -207,7 +207,7 @@ RIP:7FFF6EC9244D Return Address:7FFF702ADF78 Frame Pointer:0 Stack Pointer:12748
 RIP:7FFF702ADF78 Return Address:0 Frame Pointer:0 Stack Pointer:12748FFDB0 Param 1:0 Param 2:0 Param 3:0 Param 4:0 RtlUserThreadStart
 ```
 
-To show some of the power of the TED API, I have developed a client application that will log all [CALL](https://www.felixcloutier.com/x86/call) instructions that a target application executes. I then used this application against [Portal 2](https://store.steampowered.com/app/620/Portal_2/), attaching to *client.dll* with the goal of finding the code that is executed when a player shoots their portal gun.
+To show some of the power of the TED API, I have developed a client application that will log all [CALL](https://www.felixcloutier.com/x86/call) instructions that a target application executes. I then used this application against [Portal 2](https://store.steampowered.com/app/620/Portal_2/), attaching to *client.dll*, with the goal of finding the code that is executed when a player shoots their portal gun.
 
 ![](https://www.codereversing.com/wp-content/uploads/2022/10/image-1-1024x566.png)
 
@@ -245,7 +245,7 @@ The *call* instruction at *0x2E22C0DC* is the one that was triggered when the po
 
 ![](https://www.codereversing.com/wp-content/uploads/2022/10/image-2.png)
 
-These parameters don't make much immediate sense, but *EDI* and *EBX* look interesting as they are the second and third arguments to the function and have integer values. Clicking to shoot several times shows that these values stay consistent. However, there is a change when you choose to shoot a blue portal versus an orange one (left click versus right click). Clicking the right mouse button to shoot gives the following values when the breakpoint gets hit:
+These registers don't make much immediate sense, but *EDI* and *EBX* look interesting as they are the second and third arguments to the function and have integer values. Clicking to shoot several times shows that these values stay consistent. However, there is a change when you choose to shoot a blue portal versus an orange one (left click versus right click). Clicking the right mouse button to shoot gives the following values when the breakpoint gets hit:
 
 ![](https://www.codereversing.com/wp-content/uploads/2022/10/image-3.png)
 
@@ -263,7 +263,7 @@ Looking up above, *EBX* and *EDI* are derived from what gets stored in *EAX*, wh
 287EC0C5 | 74 17                    | je client.287EC0DE                      |
 ```
 
-But before getting side tracked further reverse engineering, the functionality of the Call Logger does seem to have been validated, and within around 5 minutes of playing around with it, we've managed to find the location of code responsible for handling a weapon fire event. This is a rather quick discovery; the alternative usually being to set breakpoints on Windows APIs related to key presses and tracing from there to find the relevant application code.
+But before getting side tracked further reverse engineering, the functionality of the Call Logger does seem to have been validated, and within around 5 minutes of playing around with it, the location of code responsible for handling a weapon fire event has been found. This is a rather quick discovery; the alternative usually being to set breakpoints on Windows APIs related to key presses and tracing from there to find the relevant application code.
 
 The source code for the TED API, Call Logger, and other demo applications is available on GitHub. Visual Studio is used as the build IDE for the TED API and demo applications; the solution can opened in Visual Studio and 32 or 64-bit binaries can be built. As a prerequisite to building, a few external packages will need to be installed. The preferred way to do this is via [vcpkg](https://github.com/microsoft/vcpkg), and steps are shown to install the dependencies below:
 
